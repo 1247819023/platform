@@ -6,6 +6,7 @@ import com.nf147.platform.service.GeFavorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -22,9 +23,20 @@ public class GeFavorServiceImpl implements GeFavorService {
         return geFavorMapper.deleteByPrimaryKey(id);
     }
 
+    /**
+     * 梁
+     * // TODO: 2019/2/25
+     * 添加收藏数量
+     */
     @Override
     public int insert(GeFavor record) {
-        return geFavorMapper.insert(record);
+        if (record != null) {
+            if (geFavorMapper.insert(record) == 1) {
+                return geFavorMapper.insert(record);
+            }
+            return 1;
+        }
+        return 0;
     }
 
     @Override

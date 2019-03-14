@@ -43,11 +43,21 @@ public class GePolicyServiceImpl implements GePolicyService {
         return gePolicyMapper.updateByPrimaryKey(record);
     }
 
+    /**
+     * lgj
+     * // TODO: 2019/2/18
+     *修改收藏数
+     */
     @Override
     public int updateByFavor(Integer id) {
         return gePolicyMapper.updateByFavor(id);
     }
 
+    /**
+     * lgj
+     * // TODO: 2019/2/18
+     *修改评论数
+     */
     @Override
     public int updateByComment(Integer id) {
         return gePolicyMapper.updateByComment(id);

@@ -1,9 +1,9 @@
 package com.nf147.platform.web;
 
 import com.nf147.platform.entity.GeIndustry;
-import com.nf147.platform.entity.GeInstitution;
-import com.nf147.platform.service.GeInstitutionService;
-import com.nf147.platform.service.impl.GeInstitutionServiceImpl;
+import com.nf147.platform.entity.GePolicyCategory;
+import com.nf147.platform.service.GePolicyCategoryService;
+import com.nf147.platform.service.impl.GePolicyCategoryServiceImpl;
 import com.nf147.platform.util.response.Constants;
 import com.nf147.platform.util.response.JSONResponse;
 import org.mybatis.spring.MyBatisSystemException;
@@ -15,22 +15,27 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+/**
+ * @author 梁光健
+ * @info 政策类型
+ * @// TODO: 2019/02/26
+ */
 @RestController
-public class GeInstitutionController {
+public class GePolicyCategoryController {
     @Autowired
-    private GeInstitutionServiceImpl geInstitutionService;
+    private GePolicyCategoryServiceImpl gePolicyCategoryService;
 
     /**
-     * 添加政府事业单位表数据
+     * 添加政策类型表数据
      *
      * @author 梁光健
      * @// TODO: 2019/02/26
      */
-    @PostMapping("/institution/insert")
-    public JSONResponse insertInstitution(@RequestBody GeInstitution geInstitution) {
+    @PostMapping("/category/insert")
+    public JSONResponse insertCategory(@RequestBody GePolicyCategory gePolicyCategory) {
         try {
-            if (geInstitution != null) {
-                int result = geInstitutionService.insert(geInstitution);
+            if (gePolicyCategory != null) {
+                int result = gePolicyCategoryService.insert(gePolicyCategory);
                 if (result > 0) {
                     return JSONResponse.OK(Constants.SUCCESS_200, result);
                 }
@@ -44,15 +49,15 @@ public class GeInstitutionController {
     }
 
     /**
-     * 查询政府事业单位表数据
+     * 查询政策类型表数据
      *
      * @author 梁光健
      * @// TODO: 2019/02/26
      */
-    @GetMapping("/institution/select")
-    public JSONResponse selectInstitution() {
+    @GetMapping("/category/select")
+    public JSONResponse selectCategory() {
         try {
-            List<GeInstitution> result = geInstitutionService.selectAll();
+            List<GePolicyCategory> result = gePolicyCategoryService.selectAll();
             if (result != null) {
                 return JSONResponse.OK(Constants.SUCCESS_200, result);
             }
@@ -65,37 +70,38 @@ public class GeInstitutionController {
     }
 
     /**
-     * 修改政府事业单位表数据
+     * 添加政策类型表数据
+     *
      * @author 梁光健
      * @// TODO: 2019/02/26
-     * */
-    @PostMapping("/institution/update")
-    public JSONResponse updateInstitution(@RequestBody GeInstitution geInstitution){
+     */
+    @PostMapping("/category/update")
+    public JSONResponse updateCategory(@RequestBody GePolicyCategory gePolicyCategory) {
         try {
-            if (geInstitution != null) {
-                int result = geInstitutionService.updateByPrimaryKey(geInstitution);
+            if (gePolicyCategory != null) {
+                int result = gePolicyCategoryService.updateByPrimaryKey(gePolicyCategory);
                 if (result > 0) {
-                    return  JSONResponse.OK(Constants.SUCCESS_200,result);
+                    return JSONResponse.OK(Constants.SUCCESS_200, result);
                 }
             }
         } catch (MyBatisSystemException ex) {
-            return JSONResponse.ERROR(Constants.ERROR_500,ex.getMessage());
+            return JSONResponse.ERROR(Constants.ERROR_500, ex.getMessage());
         } catch (Exception ex) {
-            return JSONResponse.ERROR(Constants.ERROR_408,ex.getMessage());
+            return JSONResponse.ERROR(Constants.ERROR_408, ex.getMessage());
         }
         return null;
     }
 
     /**
-     * 查询政府事业单位表数据
+     * 添加政策类型表数据
      *
      * @author 梁光健
      * @// TODO: 2019/02/26
      */
-    @GetMapping("/institution/delete")
-    public JSONResponse deleteInstitution(Integer id) {
+    @GetMapping("/category/delect")
+    public JSONResponse delectCategory(Integer id) {
         try {
-            int result = geInstitutionService.deleteByPrimaryKey(id);
+            int result = gePolicyCategoryService.deleteByPrimaryKey(id);
             if (result > 0) {
                 return JSONResponse.OK(Constants.SUCCESS_200, result);
             }

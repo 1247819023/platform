@@ -1,9 +1,8 @@
 package com.nf147.platform.web;
 
-import com.nf147.platform.entity.GeIndustry;
-import com.nf147.platform.entity.GeInstitution;
-import com.nf147.platform.service.GeInstitutionService;
-import com.nf147.platform.service.impl.GeInstitutionServiceImpl;
+import com.nf147.platform.entity.GeEducationCategory;
+import com.nf147.platform.service.GeEducationCategoryService;
+import com.nf147.platform.service.impl.GeEducationCategorySeriveImpl;
 import com.nf147.platform.util.response.Constants;
 import com.nf147.platform.util.response.JSONResponse;
 import org.mybatis.spring.MyBatisSystemException;
@@ -15,22 +14,28 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+/**
+ * @author 梁光健
+ * @info 学历类型
+ * @// TODO: 2019/02/26
+ */
 @RestController
-public class GeInstitutionController {
+public class GeEducationCategoryController {
+
     @Autowired
-    private GeInstitutionServiceImpl geInstitutionService;
+    private GeEducationCategorySeriveImpl educationCategoryService;
 
     /**
-     * 添加政府事业单位表数据
+     * 添加学历类型表数据
      *
      * @author 梁光健
      * @// TODO: 2019/02/26
      */
-    @PostMapping("/institution/insert")
-    public JSONResponse insertInstitution(@RequestBody GeInstitution geInstitution) {
+    @PostMapping("/education/insert")
+    public JSONResponse insertEducation(@RequestBody GeEducationCategory geEducationCategory) {
         try {
-            if (geInstitution != null) {
-                int result = geInstitutionService.insert(geInstitution);
+            if (geEducationCategory != null) {
+                int result = educationCategoryService.insert(geEducationCategory);
                 if (result > 0) {
                     return JSONResponse.OK(Constants.SUCCESS_200, result);
                 }
@@ -44,15 +49,15 @@ public class GeInstitutionController {
     }
 
     /**
-     * 查询政府事业单位表数据
+     * 查询学历类型表数据
      *
      * @author 梁光健
      * @// TODO: 2019/02/26
      */
-    @GetMapping("/institution/select")
-    public JSONResponse selectInstitution() {
+    @GetMapping("/education/select")
+    public JSONResponse selectEducation() {
         try {
-            List<GeInstitution> result = geInstitutionService.selectAll();
+            List<GeEducationCategory> result = educationCategoryService.selectAll();
             if (result != null) {
                 return JSONResponse.OK(Constants.SUCCESS_200, result);
             }
@@ -65,37 +70,38 @@ public class GeInstitutionController {
     }
 
     /**
-     * 修改政府事业单位表数据
+     * 修改学历类型表数据
+     *
      * @author 梁光健
      * @// TODO: 2019/02/26
-     * */
-    @PostMapping("/institution/update")
-    public JSONResponse updateInstitution(@RequestBody GeInstitution geInstitution){
+     */
+    @PostMapping("/education/update")
+    public JSONResponse updateEducation(@RequestBody GeEducationCategory geEducationCategory) {
         try {
-            if (geInstitution != null) {
-                int result = geInstitutionService.updateByPrimaryKey(geInstitution);
+            if (geEducationCategory != null) {
+                int result = educationCategoryService.updateByPrimaryKey(geEducationCategory);
                 if (result > 0) {
-                    return  JSONResponse.OK(Constants.SUCCESS_200,result);
+                    return JSONResponse.OK(Constants.SUCCESS_200, result);
                 }
             }
         } catch (MyBatisSystemException ex) {
-            return JSONResponse.ERROR(Constants.ERROR_500,ex.getMessage());
+            return JSONResponse.ERROR(Constants.ERROR_500, ex.getMessage());
         } catch (Exception ex) {
-            return JSONResponse.ERROR(Constants.ERROR_408,ex.getMessage());
+            return JSONResponse.ERROR(Constants.ERROR_408, ex.getMessage());
         }
         return null;
     }
 
     /**
-     * 查询政府事业单位表数据
+     * 删除学历类型表数据
      *
      * @author 梁光健
      * @// TODO: 2019/02/26
      */
-    @GetMapping("/institution/delete")
-    public JSONResponse deleteInstitution(Integer id) {
+    @GetMapping("/education/delete")
+    public JSONResponse deleteEducation(Integer id) {
         try {
-            int result = geInstitutionService.deleteByPrimaryKey(id);
+            int result = educationCategoryService.deleteByPrimaryKey(id);
             if (result > 0) {
                 return JSONResponse.OK(Constants.SUCCESS_200, result);
             }

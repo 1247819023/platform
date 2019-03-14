@@ -42,6 +42,11 @@ public class GePolicyController {
         return null;
     }
 
+    /**
+     * @author lgj
+     * @info 修改政策收藏数
+     * @// TODO: 2019/03/08
+     */
     @PostMapping("/policy/updateFavor")
     public JSONResponse updateFavor(Integer id){
         try {
@@ -59,6 +64,11 @@ public class GePolicyController {
         return null;
     }
 
+    /**
+     * @author lgj
+     * @info 修改政策评论数
+     * @// TODO: 2019/03/08
+     */
     @PostMapping("/policy/updateComment")
     public JSONResponse updateComment(Integer id){
         try {

@@ -22,9 +22,20 @@ public class GeCommentServiceImpl implements GeCommentService {
         return geCommentMapper.deleteByPrimaryKey(id);
     }
 
+    /**
+     * 梁
+     * // TODO: 2019/2/25
+     * 添加评论数
+     */
     @Override
     public int insert(GeComment record) {
-        return geCommentMapper.insert(record);
+        if (record != null) {
+            if (geCommentMapper.insert(record) == 1) {
+                return geCommentMapper.insert(record);
+            }
+            return 1;
+        }
+        return 0;
     }
 
     @Override
